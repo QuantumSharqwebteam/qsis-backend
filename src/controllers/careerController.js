@@ -1,24 +1,24 @@
 import Career from "../models/careerSchema.js"
 
 // creating a new data
-const CreateCareer = async (req,res) => {
+const CreateCareer = async (req, res) => {
     // console.log(req.body);
     // res.send(req.body)
 
     try {
-        const career = await Career.create(req.body) 
+        const career = await Career.create(req.body)
         res.status(200).json(career);
     } catch (error) {
-       res.status(500).json({message : error.message}) 
+        res.status(500).json({ message: error.message })
     }
 }
 
-const FetchCareer =  async (req, res) => {
+const FetchCareer = async (req, res) => {
     try {
         const career = await Career.find({})
         res.status(200).json(career);
     } catch (error) {
-        res.status(500).json({message : error.message});
+        res.status(500).json({ message: error.message });
     }
 }
 
@@ -72,19 +72,19 @@ const UpdateCareer = async (req, res) => {
 const deleteCareer = async (req, res) => {
     try {
         const { id } = req.params;
-        
+
         const career = await Career.findByIdAndDelete(id)
 
-        if(!career) {
-            res.status(404).json({message : "Career not found"});
+        if (!career) {
+            res.status(404).json({ message: "Career not found" });
         }
-        
-        res.status(200).json({message : "Career deleted successfully"});
+
+        res.status(200).json({ message: "Career deleted successfully" });
 
     } catch (error) {
-        res.status(500).json({message : error.message})
+        res.status(500).json({ message: error.message })
     }
 };
 
 
-export {CreateCareer, FetchCareer, FetchOnecareer, UpdateCareer, deleteCareer}
+export { CreateCareer, FetchCareer, FetchOnecareer, UpdateCareer, deleteCareer }

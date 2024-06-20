@@ -7,7 +7,7 @@ const careerRouter = express.Router()
 careerRouter.post('/', CreateCareer)
 careerRouter.get('/', FetchCareer)
 careerRouter.get('/:id', FetchOnecareer)
-careerRouter.put('/:id', UpdateCareer)
+careerRouter.patch('/:id', UpdateCareer)
 careerRouter.delete('/:id', deleteCareer)
 
 export default careerRouter;
