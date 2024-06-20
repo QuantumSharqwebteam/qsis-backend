@@ -1,5 +1,5 @@
 import { connect } from "mongoose";
 
-connect("mongodb+srv://AbhiCode04:abhinav05@mygear.m3szxsz.mongodb.net/QSIS?retryWrites=true&w=majority&appName=myGear")
+connect("mongodb+srv://qsisvellore:qsismongodb@qsis.ndk49xu.mongodb.net/QSIS?retryWrites=true&w=majority&appName=QSIS")
 .then(()=>console.log("Mongodb Connected"))
 .catch((err)=>console.log("Error connecting to Mongodb",err))
