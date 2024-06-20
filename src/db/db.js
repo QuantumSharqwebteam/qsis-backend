@@ -1,5 +1,15 @@
-import { connect } from "mongoose";
+// import { connect } from "mongoose";
+// const mongoose = require('mongoose');
+import {mongoose, connect } from "mongoose"
 
-connect("mongodb+srv://AbhiCode04:abhinav05@mygear.m3szxsz.mongodb.net/QSIS?retryWrites=true&w=majority&appName=myGear")
-.then(()=>console.log("Mongodb Connected"))
-.catch((err)=>console.log("Error connecting to Mongodb",err))
+const uri = "mongodb+srv://QSIS:AGQHrh2qgQY4bmca@qsis.ufyx0wp.mongodb.net/QSIS?retryWrites=true&w=majority&appName=qsis"
+mongoose.connect(uri);
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+db.once('open', function() {
+  console.log('Connected to MongoDB Atlas');
+  
+});
