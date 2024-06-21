@@ -4,7 +4,7 @@ const fetchProject = async (req, res) => {
     try {
         const projectData = await Project.find({})
         res.status(200).json(projectData)
-        console.log(projectData);
+        // console.log(projectData);
     }
     catch (error) {
         console.error('Error fetching Projects: ', error)

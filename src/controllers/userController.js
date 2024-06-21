@@ -1,14 +1,13 @@
 import User from "../models/userSchema.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-const secret = "qsis@1234"
+const secret = process.env.JWT_SECRET
 
 const loginUser = async (req, res) => {
+    try{
     const { email, password } = req.body
-    console.log(req.body);
     const user = await User.findOne({ email})
     const hashpass = user.password
-    console.log(user.password);
 
     if (!user) {
         res.status(404).json({ message: "user not found" })
@@ -16,9 +15,10 @@ const loginUser = async (req, res) => {
     const passwordValid = await bcrypt.compare(password, hashpass)
     if (!passwordValid) {
         res.json({
-            message: "Invalid Password"
+            message: "Invalid email or Password"
         })
-    } 
+    } else{
+
         const token = jwt.sign({ _id: user._id, }, secret, { expiresIn: "30d" })
         res.status(200).json({
             message: "Login Successfull",
@@ -29,12 +29,19 @@ const loginUser = async (req, res) => {
                 email:user.email,
             }
         })
+    }
+} catch(err){
+    console.log(`you got error ${err}`)
+    res.status(404).json({
+        message:"Invalid email or Password"
+    })
+}
+
 }
 const createUser = async (req, res) => {
     try {
         const { name, email, password } = req.body
         const hashedPassword = await bcrypt.hash(password, 12)
-        console.log(hashedPassword);
         const newUser = await User.create({
             name,
             email,
